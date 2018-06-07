@@ -41,13 +41,22 @@ args = parser.parse_args()
     returns='str'
     )
 def subprocess_check_output(command):
+    """
+    :type command: str
+    :rtype: str
+    """
     return subprocess.check_output(command.strip().split(' '))
 
 @contract(
-    command='int',
+    blocks='int',
     returns='str'
     )
 def bytes_to_readable(blocks):
+    """
+    :type blocks: int,>0
+    :rtype: str
+    """
+
     byts = blocks * 512
     readable_bytes = byts
     count = 0
@@ -69,6 +78,15 @@ def bytes_to_readable(blocks):
 )
 def print_tree(file_tree, file_tree_node, path, largest_size, total_size,
                depth=0):
+    """
+    :type file_tree: dict
+    :type file_tree_node: dict
+    :type path: str
+    :type largest_size: int,>0
+    :type total_size: int,>0
+    :type depth: int,>0
+    :rtype: null
+    """
     percentage = int(file_tree_node['size'] / float(total_size) * 100)
 
     if percentage < args.hide:
@@ -93,6 +111,12 @@ def print_tree(file_tree, file_tree_node, path, largest_size, total_size,
     returns='None'
     )
 def show_space_list(directory='.', depth=-1, order=True):
+    """
+    :type directory: str
+    :type depth: int,>0
+    :type order: bool
+    :rtype: null
+    """
     abs_directory = os.path.abspath(directory)
 
     cmd = 'du '
